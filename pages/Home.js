@@ -49,6 +49,7 @@ export default function Home() {
     });
     // Calling function to retrieve reverse geodata
     getGeocodeAsync(latitude, longitude);
+    console.log(latitude);
   }
 
   // Function to retrieve reverse geodata. Country and city for this specific case
@@ -65,6 +66,7 @@ export default function Home() {
       .then((json) => {
         let loc = json;
         setGeoData({ country: loc.countryName, city: loc.city });
+        console.log(loc);
       });
   }
 
