@@ -10,27 +10,62 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  row: {
+    flexDirection: "row",
+    alignContent: "center",
+    textAlignVertical: "center",
+  },
+  tempPrincipal: {
+    color: "#fff",
+    fontSize: 70,
+    textTransform: "uppercase",
+    paddingBottom: 25,
+  },
   title: {
-    fontSize: 20,
+    fontSize: 30,
+    color: "#fff",
+    textTransform: "uppercase",
+    paddingBottom: 15,
   },
 });
 
 function Weather(wData) {
-  const icon = `http://openweathermap.org/img/w/${wData.icon}.png`;
+  //  Saving URL of the current icon
+  const iconURL = `http://openweathermap.org/img/w/${wData.icon}.png`;
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{wData ? `${wData.description}` : ""}</Text>
-      <Text style={styles.title}>{wData ? `I: ${wData.icon}` : ""}</Text>
-      <Image source={{ uri: icon }} style={{ width: 150, height: 150 }} />
-      <Text style={styles.title}>{wData ? `Temp: ${wData.temp}` : ""}</Text>
-      <Text style={styles.title}>
-        {wData ? `TempMin: ${wData.tempMin}` : ""}
-      </Text>
-      <Text style={styles.title}>
-        {wData ? `TempMax: ${wData.tempMax}` : ""}
-      </Text>
-      <Text style={styles.title}>{wData ? `FL: ${wData.feelsLike}` : ""}</Text>
-      <Text style={styles.title}>{wData ? `H: ${wData.humidity}` : ""}</Text>
+      <View style={styles.row}>
+        <Text style={styles.tempPrincipal}>
+          {wData ? `${wData.temp.toFixed(0)}°C` : ""}
+        </Text>
+      </View>
+      <View style={styles.row}>
+        <Image source={{ uri: iconURL }} style={{ width: 120, height: 120 }} />
+        <Text style={styles.title}>{wData ? `${wData.description}` : ""}</Text>
+      </View>
+
+      <View style={styles.row}>
+        <Text style={styles.title}>
+          {wData ? `Min: ${wData.tempMin}°C` : ""}
+        </Text>
+      </View>
+
+      <View style={styles.row}>
+        <Text style={styles.title}>
+          {wData ? `Max: ${wData.tempMax}°C` : ""}
+        </Text>
+      </View>
+      <View style={styles.row}>
+        <Text style={styles.title}>
+          {wData ? `Feels Like: ${wData.feelsLike}°C` : ""}
+        </Text>
+      </View>
+
+      <View style={styles.row}>
+        <Text style={styles.title}>
+          {wData ? `Humidity: ${wData.humidity}` : ""}
+        </Text>
+      </View>
     </View>
   );
 }
